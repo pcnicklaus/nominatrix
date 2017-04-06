@@ -15,6 +15,7 @@ class NominationsController < ApplicationController
   # GET /nominations/new
   def new
     @nomination = Nomination.new
+@nomination.nominator_user_id = current_user.id
   end
 
   # GET /nominations/1/edit
@@ -25,7 +26,7 @@ class NominationsController < ApplicationController
   # POST /nominations.json
   def create
     @nomination = Nomination.new(nomination_params)
-
+    @nomination.nominator_user_id = current_user.id
     respond_to do |format|
       if @nomination.save
         format.html { redirect_to @nomination, notice: 'Nomination was successfully created.' }
